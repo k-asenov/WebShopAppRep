@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-using WebShopApp.Data;
-using WebShopApp.Infrastrucutre.Data.Domain;
+using WebShopApp.Infrastructure.Data;
+using WebShopApp.Infrastructure.Data.Entities;
 
 namespace WebShopApp
 {
@@ -17,14 +17,14 @@ namespace WebShopApp
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-          
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
-                options.Password.RequiredLength = 5;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
+
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => { 
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 5;
 
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
